@@ -3,9 +3,21 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import {Button} from "@/components/ui/button.tsx";
+import ArticlePage from './components/ArticlePage';
+
+// Import the markdown content
+import markdownContent from './articles/example.md?raw';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [showArticle, setShowArticle] = useState(false)
+
+  if (showArticle) {
+    return <ArticlePage 
+      markdownContent={markdownContent}
+      onBack={() => setShowArticle(false)}
+    />;
+  }
 
   return (
     <>
@@ -25,6 +37,12 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
+        <Button 
+          onClick={() => setShowArticle(true)}
+          className="mt-4"
+        >
+          View Article
+        </Button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
